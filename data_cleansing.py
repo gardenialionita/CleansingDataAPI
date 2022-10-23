@@ -12,13 +12,22 @@ def lowercase(text):
 
 #Removing Unicode Characters
 def remove_unicode_char(text):
-    text = re.sub(r"(@\[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)|^rt|http.+?", "", text)
+    text = re.sub('\n',' ',text)
+    text = re.sub(r"((www\.[^\s]+)|(https?://[^\s]+)|(http?://[^\s]+))",' ',text)
+    text = re.sub('  +',' ',text)
+    return text
+
+#Removing Non-AlphaNumeric
+def remove_non_alphanum(text):
+    text = re.sub('[^0-9a-zA-Z]+',' ', text)
+    text = re.sub('  +',' ',text)
     return text
 
 #Cleaning Data
 def preprocess(text):
     text = lowercase(text)
     text = remove_unicode_char(text)
+    text = remove_non_alphanum(text)
     return text
 
 #Process File
@@ -28,7 +37,7 @@ def process_file(input_file):
 
     for tweet in first_column:
         tweet_clean = preprocess(tweet)
-        insert_tweet = 'insert into master_tweet (raw_tweet, clean_tweet) values(?, ?)'
+        insert_tweet = 'insert into master_tweet (tweet_raw, tweet_clean) values(?, ?)'
         value = (tweet, tweet_clean)
         mycursor.execute(insert_tweet, value)
         db_conn.commit()
