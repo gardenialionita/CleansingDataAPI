@@ -1,0 +1,219 @@
+{
+    "openapi": "3.0.3",
+    "info":{
+        "title":"Twish!",
+        "version":"1.0.0",
+        "description": "Clean ...",
+        "termsOfService":"",
+        "contact":{
+            "name": "Gardenia Lionita",
+            "email": "gardenialionita@gmail.com",
+            "url": ""          
+        },
+        "license":{
+            "name": "APACHE 2.0",
+            "url": ""
+        }
+    },
+
+    "servers":[
+        {
+            "description": "Twish! RESTFul API Server",
+            "url": "/"
+        }
+    ],
+
+    "externalDocs":{
+        "description":" ...",
+        "url": ""
+    },
+
+    "paths":{
+        "/":{
+            "get":{
+                "summary": "Welcome Page",
+                "description": "Welcome to Twish!",
+                "responses":{
+                    "200" :{
+                        "description": "Success"
+                    },
+                    "400":{
+                        "description": "Misunderstood"
+                    },
+                    "401":{
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/tweet":{
+            "get":{
+                "summary": "Get all of Twish! list",
+                "description": "Thousand of Twish! list",
+                "responses":{
+                    "200" :{
+                        "description": "Success"
+                    },
+                    "400":{
+                        "description": "Misunderstood"
+                    },
+                    "401":{
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "post":{
+                "summary": "Post a text",
+                "description": "Post a text to clean",
+                "requestBody":{
+                    "required":"true",
+                    "content":{
+                        "multipart/form-data":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "text":{
+                                        "type":"string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200" :{
+                        "description": "Success"
+                    },
+                    "400":{
+                        "description": "Misunderstood"
+                    },
+                    "401":{
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/tweet/{tweet_id}":{
+            "get":{
+                "summary": "Get tweet by id",
+                "description": "Get tweet in the database by id",
+                "parameters":[{
+                    "in":"path",
+                    "name":"tweet_id",
+                    "schema":{
+                        "type":"integer"
+                    },
+                    "required":"true",
+                    "description": "The id of tweet in the database"
+                }],
+                "responses":{
+                    "200" :{
+                        "description": "Success"
+                    },
+                    "400":{
+                        "description": "Misunderstood"
+                    },
+                    "401":{
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "put":{
+                "summary": "Edit existing tweet",
+                "description": "Edit existing tweet in the database",
+                "parameters":[{
+                    "in":"path",
+                    "name":"tweet_id",
+                    "schema":{
+                        "type":"integer"
+                    },
+                    "required":"true",
+                    "description": "The id of tweet in the database"
+                }],
+                "requestBody":{
+                    "required":"true",
+                    "content":{
+                        "multipart/form-data":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "text":{
+                                        "type":"string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200" :{
+                        "description": "Success"
+                    },
+                    "400":{
+                        "description": "Misunderstood"
+                    },
+                    "401":{
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "delete":{
+                "summary": "Delete tweet by id",
+                "description": "Delete existing tweet in the database by id",
+                "parameters":[{
+                    "in":"path",
+                    "name":"tweet_id",
+                    "schema":{
+                        "type":"integer"
+                    },
+                    "required":"true",
+                    "description": "The id of tweet in the database"
+                }],
+                "responses":{
+                    "200" :{
+                        "description": "Success"
+                    },
+                    "400":{
+                        "description": "Misunderstood"
+                    },
+                    "401":{
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/tweet/file":{
+            "post":{
+                "summary": "Post a file",
+                "description": "Post a file to clean",
+                "requestBody":{
+                    "required":"true",
+                    "content":{
+                        "multipart/form-data":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "file":{
+                                        "type":"string",
+                                        "format":"base64"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200" :{
+                        "description": "Success"
+                    },
+                    "400":{
+                        "description": "Misunderstood"
+                    },
+                    "401":{
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        }
+    }
+}
